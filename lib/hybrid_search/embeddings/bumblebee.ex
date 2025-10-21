@@ -46,17 +46,19 @@ defmodule HybridSearch.Embeddings.Bumblebee do
     {:ok, model_info} = Bumblebee.load_model({:hf, "thenlper/gte-small"})
     {:ok, tokenizer} = Bumblebee.load_tokenizer({:hf, "thenlper/gte-small"})
 
-    {:ok, serving} =
-      Text.TextEmbedding.text_embedding(
-        model_info,
-        tokenizer,
-        compile: [batch_size: @batch_size, sequence_length: @sequence_length],
-        defn_options: if(Code.ensure_loaded?(EXLA.Backend), do: [compiler: EXLA], else: []),
-        output_attribute: :hidden_state,
-        output_pool: :mean_pooling
-      )
-
-    serving
+    Text.TextEmbedding.text_embedding(
+      model_info,
+      tokenizer,
+      compile: [batch_size: @batch_size, sequence_length: @sequence_length],
+      defn_options: if(Code.ensure_loaded?(EXLA.Backend), do: [compiler: EXLA], else: []),
+      output_attribute: :hidden_state,
+      output_pool: :mean_pooling
+    )
+    |> case do
+      {:ok, serving} -> serving
+      %Nx.Serving{} = serving -> serving
+      other -> raise "unexpected serving returned from Bumblebee: #{inspect(other)}"
+    end
   end
 
   # Handles both %{embedding: t} and raw tensor returns

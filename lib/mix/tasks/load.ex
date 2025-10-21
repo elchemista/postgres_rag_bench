@@ -40,9 +40,6 @@ defmodule Mix.Tasks.HybridSearch.Load do
         Enum.each(errors, fn {path, reason} ->
           Mix.shell().error("  #{path}: #{format_error(reason)}")
         end)
-
-      {:error, reason} ->
-        Mix.shell().error("Failed to load dataset: #{format_error(reason)}")
     end
   end
 

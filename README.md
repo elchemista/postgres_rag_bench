@@ -20,7 +20,9 @@ mix ecto.create
 mix ecto.migrate
 ```
 
-These commands install dependencies, create the database, and run migrations.
+These commands install dependencies, create the database, and run migrations. If you
+pull updates that add new SQL functions (e.g. the binary distance helpers), run
+`mix ecto.migrate` again to ensure your database has them.
 
 ### Embedding model
 
@@ -88,6 +90,26 @@ Each search returns a list of maps containing:
   - `binary_hamming_distance/2`
   - `binary_jaccard_distance/2`
 - IVFFlat indexes are created where supported. If your pgvector build does not include the optional operator classes (e.g. `vector_l1_ops`, `bit_hamming_ops`), the migration skips those indexes gracefully.
+
+## Benchmarks
+
+Compare search runtimes with Benchee:
+
+```bash
+mix bench.search --query "phoenix" --limit 5
+```
+
+Available flags:
+
+- `--query` – text to search (default: `"phoenix"`)
+- `--limit` – number of results per run (default: `5`)
+- `--time` – seconds spent benchmarking each scenario (default: `1.0`)
+- `--warmup` – warmup time in seconds (default: `0.5`)
+
+Run `mix hybrid_search.load` beforehand so the benchmark has data to work with.
+The benchmark also needs to generate an embedding for the query text; the first run will
+download the model from Hugging Face (internet connection required). If the embedding
+is not available, the task reports the failure and only the BM25 scenario is executed.
 
 ## Development commands
 

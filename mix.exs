@@ -49,6 +49,7 @@ defmodule HybridSearch.MixProject do
       {:axon, "~> 0.6"},
       {:bumblebee, "~> 0.3"},
       {:exla, "~> 0.7", optional: true},
+      {:benchee, "~> 1.1", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.3", only: [:dev, :test], runtime: false}
     ]

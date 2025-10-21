@@ -128,8 +128,6 @@ defmodule HybridSearch.Datasets.Loader do
     |> Enum.reverse()
   end
 
-  # -- Helpers -----------------------------------------------------------------
-
   defp run_embedder(fun, chunks) do
     count = length(chunks)
 
@@ -204,8 +202,8 @@ defmodule HybridSearch.Datasets.Loader do
     end
   end
 
+  defp normalize_list(list, expected) when list === [], do: empty_list(expected)
   defp normalize_list(list, expected) when length(list) == expected, do: list
-  defp normalize_list(list, expected) when length(list) == 0, do: empty_list(expected)
 
   defp normalize_list(list, expected) when length(list) < expected,
     do: list ++ empty_list(expected - length(list))

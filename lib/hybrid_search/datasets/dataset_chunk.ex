@@ -8,6 +8,7 @@ defmodule HybridSearch.Datasets.DatasetChunk do
   import Ecto.Changeset
 
   @type embedding_vector :: Pgvector.Ecto.Vector.t() | nil
+
   @binary_length 384
 
   @type t :: %__MODULE__{
