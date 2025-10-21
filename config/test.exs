@@ -13,15 +13,5 @@ config :hybrid_search, HybridSearch.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 
-# We don't run a server during test. If one is required,
-# you can enable the server option below.
-config :hybrid_search, HybridSearchWeb.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "UjZhOLc41TXCFGN95Q8r3dw2ZDZ6ZHIuia8JXElF3tBWc59joUxj0rQLlFYF3A76",
-  server: false
-
 # Print only warnings and errors during test
 config :logger, level: :warning
-
-# Initialize plugs at runtime for faster test compilation
-config :phoenix, :plug_init_mode, :runtime

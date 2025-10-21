@@ -9,8 +9,7 @@ defmodule HybridSearch.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps(),
-      listeners: [Phoenix.CodeReloader]
+      deps: deps()
     ]
   end
 
@@ -39,15 +38,17 @@ defmodule HybridSearch.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.8.0"},
-      {:phoenix_ecto, "~> 4.5"},
+      {:phoenix, "~> 1.7"},
       {:ecto_sql, "~> 3.13"},
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"},
+      {:pgvector, "~> 0.3"},
+      {:nx, "~> 0.6"},
+      {:axon, "~> 0.6"},
+      {:bumblebee, "~> 0.3"},
+      {:exla, "~> 0.7", optional: true},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.3", only: [:dev, :test], runtime: false}
     ]
