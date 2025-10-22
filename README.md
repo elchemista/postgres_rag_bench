@@ -110,7 +110,7 @@ The benchmark also needs to generate an embedding for the query text; the first 
 download the model from Hugging Face (internet connection required). If the embedding
 is not available, the task reports the failure and only the BM25 scenario is executed.
 
-## Development commands
+## Development
 
 ```bash
 mix test          # run the test suite
