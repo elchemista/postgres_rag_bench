@@ -1,6 +1,6 @@
-# HybridSearch
+# PostgreSQL Search Benchmarks (Playground)
 
-HybridSearch is a playground for comparing different PostgreSQL search strategies:
+This project is a playground for comparing different PostgreSQL search strategies:
 
 - Full‑text search with BM25 ranking
 - Dense vector similarity (cosine, L2, L1, inner product) using `pgvector`
@@ -10,7 +10,6 @@ HybridSearch is a playground for comparing different PostgreSQL search strategie
 
 - Elixir ≥ 1.18, Erlang/OTP ≥ 27
 - PostgreSQL 16+ with the [`vector`](https://github.com/pgvector/pgvector) extension installed
-- (Optional) GPU or CPU with AVX support if you plan to enable EXLA for faster embeddings
 
 ## Setup
 
